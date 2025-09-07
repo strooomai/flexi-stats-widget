@@ -3,9 +3,9 @@ import { WidgetConfig } from '@/types/widget';
 // Pink theme (Kemkens style)
 export const kemkensConfig: WidgetConfig = {
   theme: {
-    name: 'Kemkens Pink',
-    gradientStart: '347 77% 60%',
-    gradientEnd: '327 73% 73%',
+    name: 'Kemkens',
+    gradientStart: '330 100% 20%',
+    gradientEnd: '330 100% 65%',
     textColor: '0 0% 100%',
     textMuted: '0 0% 100% / 0.95',
     glassBackground: '255 255 255 / 0.09',
@@ -15,7 +15,7 @@ export const kemkensConfig: WidgetConfig = {
     ctaText: '327 73% 25%',
   },
   logo: {
-    url: 'https://www.kemkens.nl/wp-content/uploads/2024/10/kemkens.svg',
+    url: 'https://www.kemkens.nl/wp-content/uploads/2024/10/kemkens.svg',347 77% 60%
     alt: 'Kemkens logo',
     width: 96,
   },
@@ -158,8 +158,8 @@ export const warmlandConfig: WidgetConfig = {
   theme: {
     name: 'Warmland',
     gradientStart: '24 91% 53%',   // #f47c1f
-    gradientEnd: '0 0% 95%',       // #f1f1f1
-    textColor: '0 0% 100%',
+    gradientEnd: '24 91% 53%',       // hsla(0, 55%, 38%, 1.00)
+    textColor: '220 9% 9%',
     textMuted: '0 0% 100% / 0.95',
     glassBackground: '255 255 255 / 0.09',
     glassBorder: '255 255 255 / 0.25',
