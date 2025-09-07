@@ -33,7 +33,7 @@ const Index = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold">Energy Widget Configurator</h1>
+              <h1 className="text-2xl font-bold">Remeha Energy Widget Configurator</h1>
               <p className="text-muted-foreground">Customize your white-label energy widget</p>
             </div>
             <div className="flex items-center gap-4">
