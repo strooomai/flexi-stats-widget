@@ -15,7 +15,7 @@ export const kemkensConfig: WidgetConfig = {
     ctaText: '327 73% 25%',
   },
   logo: {
-    url: 'https://www.kemkens.nl/wp-content/uploads/2024/10/kemkens.svg',347 77% 60%
+    url: 'https://www.kemkens.nl/wp-content/uploads/2024/10/kemkens.svg',
     alt: 'Kemkens logo',
     width: 96,
   },

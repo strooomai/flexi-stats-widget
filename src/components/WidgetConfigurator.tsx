@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { HslColorInput } from '@/components/HslColorInput';
 
 interface WidgetConfiguratorProps {
   config: WidgetConfig;
@@ -47,42 +48,34 @@ export const WidgetConfigurator: React.FC<WidgetConfiguratorProps> = ({
           
           <TabsContent value="theme" className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="gradientStart">Gradient Start (HSL)</Label>
-                <Input
-                  id="gradientStart"
-                  value={config.theme.gradientStart}
-                  onChange={(e) => updateConfig('theme.gradientStart', e.target.value)}
-                  placeholder="347 77% 60%"
-                />
-              </div>
-              <div>
-                <Label htmlFor="gradientEnd">Gradient End (HSL)</Label>
-                <Input
-                  id="gradientEnd"
-                  value={config.theme.gradientEnd}
-                  onChange={(e) => updateConfig('theme.gradientEnd', e.target.value)}
-                  placeholder="327 73% 73%"
-                />
-              </div>
-              <div>
-                <Label htmlFor="accentColor">Accent Color (HSL)</Label>
-                <Input
-                  id="accentColor"
-                  value={config.theme.accentColor}
-                  onChange={(e) => updateConfig('theme.accentColor', e.target.value)}
-                  placeholder="142 76% 73%"
-                />
-              </div>
-              <div>
-                <Label htmlFor="ctaBackground">CTA Background (HSL)</Label>
-                <Input
-                  id="ctaBackground"
-                  value={config.theme.ctaBackground}
-                  onChange={(e) => updateConfig('theme.ctaBackground', e.target.value)}
-                  placeholder="0 0% 100%"
-                />
-              </div>
+              <HslColorInput
+                id="gradientStart"
+                label="Gradient Start (HSL)"
+                value={config.theme.gradientStart}
+                placeholder="347 77% 60%"
+                onChange={(val) => updateConfig('theme.gradientStart', val)}
+              />
+              <HslColorInput
+                id="gradientEnd"
+                label="Gradient End (HSL)"
+                value={config.theme.gradientEnd}
+                placeholder="327 73% 73%"
+                onChange={(val) => updateConfig('theme.gradientEnd', val)}
+              />
+              <HslColorInput
+                id="accentColor"
+                label="Accent Color (HSL)"
+                value={config.theme.accentColor}
+                placeholder="142 76% 73%"
+                onChange={(val) => updateConfig('theme.accentColor', val)}
+              />
+              <HslColorInput
+                id="ctaBackground"
+                label="CTA Background (HSL)"
+                value={config.theme.ctaBackground}
+                placeholder="0 0% 100%"
+                onChange={(val) => updateConfig('theme.ctaBackground', val)}
+              />
             </div>
           </TabsContent>
           
