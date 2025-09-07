@@ -9,7 +9,7 @@
 @layer base {
   :root {
     /* Base colors */
-    --background: 246 246 249;
+    --background: 0 0% 98%;
     --foreground: 222.2 84% 4.9%;
 
     /* Widget theme colors - Pink theme (Kemkens style) */

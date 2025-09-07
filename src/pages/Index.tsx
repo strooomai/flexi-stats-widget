@@ -42,8 +42,11 @@ const Index = () => {
                   <SelectValue placeholder="Load preset" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="kemkens">Kemkens Pink</SelectItem>
-                  <SelectItem value="octopus">Octopus Purple</SelectItem>
+                  <SelectItem value="kemkens">Kemkens</SelectItem>
+                  <SelectItem value="feenstra">Feenstra</SelectItem>
+                  <SelectItem value="warmtethuis">WarmteThuis</SelectItem>
+                  <SelectItem value="warmland">Warmland</SelectItem>
+                  <SelectItem value="octopus">Octopus</SelectItem>
                 </SelectContent>
               </Select>
               <Button 
@@ -90,10 +93,10 @@ const Index = () => {
         {/* Preset Examples */}
         <div className="mt-12">
           <h2 className="text-xl font-bold mb-6">Preset Examples</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <Card>
               <CardHeader>
-                <CardTitle className="text-pink-600">Kemkens Pink Theme</CardTitle>
+                <CardTitle className="text-pink-600">Kemkens</CardTitle>
               </CardHeader>
               <CardContent className="p-0">
                 <div className="bg-gray-100 rounded-lg overflow-hidden">
@@ -104,7 +107,40 @@ const Index = () => {
             
             <Card>
               <CardHeader>
-                <CardTitle className="text-purple-600">Octopus Purple Theme</CardTitle>
+                <CardTitle className="text-red-600">Feenstra</CardTitle>
+              </CardHeader>
+              <CardContent className="p-0">
+                <div className="bg-gray-100 rounded-lg overflow-hidden">
+                  <EnergyWidget config={presetConfigs.feenstra} />
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-yellow-600">WarmteThuis</CardTitle>
+              </CardHeader>
+              <CardContent className="p-0">
+                <div className="bg-gray-100 rounded-lg overflow-hidden">
+                  <EnergyWidget config={presetConfigs.warmtethuis} />
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-orange-600">Warmland</CardTitle>
+              </CardHeader>
+              <CardContent className="p-0">
+                <div className="bg-gray-100 rounded-lg overflow-hidden">
+                  <EnergyWidget config={presetConfigs.warmland} />
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-purple-600">Octopus</CardTitle>
               </CardHeader>
               <CardContent className="p-0">
                 <div className="bg-gray-100 rounded-lg overflow-hidden">
