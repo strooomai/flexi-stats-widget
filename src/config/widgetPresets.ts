@@ -110,11 +110,11 @@ export const warmteThuisConfig: WidgetConfig = {
     gradientEnd: '206 31% 19%',    // #22313f
     textColor: '0 0% 100%',
     textMuted: '0 0% 100% / 0.95',
-    glassBackground: '255 255 255 / 0.09',
-    glassBorder: '255 255 255 / 0.25',
+    glassBackground: '206 31% 19% / 0.85',  // Dark blue with higher opacity
+    glassBorder: '0 0% 100% / 0.3',
     accentColor: '142 76% 73%',
-    ctaBackground: '0 0% 100%',
-    ctaText: '206 31% 19%',
+    ctaBackground: '206 31% 19%',  // Dark blue CTA
+    ctaText: '48 100% 52%',  // Yellow text on dark CTA
   },
   logo: {
     url: 'https://www.warmtethuis.nl/Files/Templates/Designs/Warmtethuis/Images/Logo_warmtethuis.svg',
