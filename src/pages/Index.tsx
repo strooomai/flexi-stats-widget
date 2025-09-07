@@ -90,61 +90,71 @@ const Index = () => {
           )}
         </div>
 
-        {/* Preset Examples */}
+        {/* Preset Examples - Square Layout */}
         <div className="mt-12">
           <h2 className="text-xl font-bold mb-6">Preset Examples</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-pink-600">Kemkens</CardTitle>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card className="aspect-square">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-pink-600 text-base">Kemkens</CardTitle>
               </CardHeader>
-              <CardContent className="p-0">
-                <div className="bg-gray-100 rounded-lg overflow-hidden">
-                  <EnergyWidget config={presetConfigs.kemkens} />
+              <CardContent className="p-0 flex-1">
+                <div className="bg-gray-100 rounded-lg overflow-hidden h-full flex items-center justify-center">
+                  <div className="transform scale-50 origin-center w-full">
+                    <EnergyWidget config={presetConfigs.kemkens} />
+                  </div>
                 </div>
               </CardContent>
             </Card>
             
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-red-600">Feenstra</CardTitle>
+            <Card className="aspect-square">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-red-600 text-base">Feenstra</CardTitle>
               </CardHeader>
-              <CardContent className="p-0">
-                <div className="bg-gray-100 rounded-lg overflow-hidden">
-                  <EnergyWidget config={presetConfigs.feenstra} />
+              <CardContent className="p-0 flex-1">
+                <div className="bg-gray-100 rounded-lg overflow-hidden h-full flex items-center justify-center">
+                  <div className="transform scale-50 origin-center w-full">
+                    <EnergyWidget config={presetConfigs.feenstra} />
+                  </div>
                 </div>
               </CardContent>
             </Card>
             
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-yellow-600">WarmteThuis</CardTitle>
+            <Card className="aspect-square">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-yellow-600 text-base">WarmteThuis</CardTitle>
               </CardHeader>
-              <CardContent className="p-0">
-                <div className="bg-gray-100 rounded-lg overflow-hidden">
-                  <EnergyWidget config={presetConfigs.warmtethuis} />
+              <CardContent className="p-0 flex-1">
+                <div className="bg-gray-100 rounded-lg overflow-hidden h-full flex items-center justify-center">
+                  <div className="transform scale-50 origin-center w-full">
+                    <EnergyWidget config={presetConfigs.warmtethuis} />
+                  </div>
                 </div>
               </CardContent>
             </Card>
             
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-orange-600">Warmland</CardTitle>
+            <Card className="aspect-square">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-orange-600 text-base">Warmland</CardTitle>
               </CardHeader>
-              <CardContent className="p-0">
-                <div className="bg-gray-100 rounded-lg overflow-hidden">
-                  <EnergyWidget config={presetConfigs.warmland} />
+              <CardContent className="p-0 flex-1">
+                <div className="bg-gray-100 rounded-lg overflow-hidden h-full flex items-center justify-center">
+                  <div className="transform scale-50 origin-center w-full">
+                    <EnergyWidget config={presetConfigs.warmland} />
+                  </div>
                 </div>
               </CardContent>
             </Card>
             
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-purple-600">Octopus</CardTitle>
+            <Card className="aspect-square">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-purple-600 text-base">Octopus</CardTitle>
               </CardHeader>
-              <CardContent className="p-0">
-                <div className="bg-gray-100 rounded-lg overflow-hidden">
-                  <EnergyWidget config={presetConfigs.octopus} />
+              <CardContent className="p-0 flex-1">
+                <div className="bg-gray-100 rounded-lg overflow-hidden h-full flex items-center justify-center">
+                  <div className="transform scale-50 origin-center w-full">
+                    <EnergyWidget config={presetConfigs.octopus} />
+                  </div>
                 </div>
               </CardContent>
             </Card>

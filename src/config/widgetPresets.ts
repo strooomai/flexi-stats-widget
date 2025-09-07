@@ -4,9 +4,9 @@ import { WidgetConfig } from '@/types/widget';
 export const kemkensConfig: WidgetConfig = {
   theme: {
     name: 'Kemkens',
-    gradientStart: '330 100% 20%',
-    gradientEnd: '330 100% 65%',
-    textColor: '0 0% 100%',
+    gradientStart: '330 100% 20%', // #660033
+    gradientEnd: '330 100% 65%',  // #ff4da6
+    textColor: '0 0% 100%', // #FFFFFF
     textMuted: '0 0% 100% / 0.95',
     glassBackground: '255 255 255 / 0.09',
     glassBorder: '255 255 255 / 0.25',
