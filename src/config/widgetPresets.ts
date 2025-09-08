@@ -29,8 +29,8 @@ export const kemkensConfig: WidgetConfig = {
     },
     gasSection: {
       title: 'Besparing gasverbruik',
-      value: '34%',
-      description: 'Je bespaart ca. 34% op je gasverbruik',
+      value: '€ 3.18',
+      description: 'Bespaard op gaskosten vandaag',
     },
     slimSturingSection: {
       title: 'Met Slim Sturing',
@@ -80,8 +80,8 @@ export const feenstraConfig: WidgetConfig = {
     },
     gasSection: {
       title: 'Besparing gasverbruik',
-      value: '32%',
-      description: 'Je bespaart ca. 32% op je gasverbruik',
+      value: '€ 2.95',
+      description: 'Bespaard op gaskosten vandaag',
     },
     slimSturingSection: {
       title: 'Met Slim Sturing',
@@ -131,8 +131,8 @@ export const warmteThuisConfig: WidgetConfig = {
     },
     gasSection: {
       title: 'Besparing gasverbruik',
-      value: '28%',
-      description: 'Je bespaart ca. 28% op je gasverbruik',
+      value: '€ 2.65',
+      description: 'Bespaard op gaskosten vandaag',
     },
     slimSturingSection: {
       title: 'Slimme Regeling',
@@ -182,8 +182,8 @@ export const warmlandConfig: WidgetConfig = {
     },
     gasSection: {
       title: 'Besparing gasverbruik',
-      value: '31%',
-      description: 'Je bespaart ca. 31% op je gasverbruik',
+      value: '€ 2.82',
+      description: 'Bespaard op gaskosten vandaag',
     },
     slimSturingSection: {
       title: 'Intelligente Sturing',
@@ -233,8 +233,8 @@ export const octopusConfig: WidgetConfig = {
     },
     gasSection: {
       title: 'Besparing gasverbruik',
-      value: '29%',
-      description: 'Je bespaart ca. 29% op je gasverbruik',
+      value: '€ 2.65',
+      description: 'Bespaard op gaskosten vandaag',
     },
     slimSturingSection: {
       title: 'Slim Sturing',

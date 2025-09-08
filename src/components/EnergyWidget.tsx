@@ -52,13 +52,27 @@ export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config }) => {
           </p>
         </header>
 
-        {/* Current Consumption Metric */}
-        <section className="flex flex-col items-center gap-2 py-3 text-center relative z-10">
-          <div className="text-[56px] leading-[64px] font-extrabold text-[hsl(var(--widget-text))] tracking-[-0.02em]">
-            24.7 kWh
-          </div>
-          <div className="text-xl leading-[26px] font-semibold text-[hsl(var(--widget-text))] opacity-95">
-            € 6.93
+        {/* Current Consumption Metrics */}
+        <section className="flex flex-col items-center gap-4 py-3 text-center relative z-10">
+          <div className="grid grid-cols-2 gap-8 w-full max-w-md">
+            {/* Electricity */}
+            <div className="flex flex-col items-center gap-1">
+              <div className="text-[42px] leading-[48px] font-extrabold text-[hsl(var(--widget-text))] tracking-[-0.02em]">
+                24.7 kWh
+              </div>
+              <div className="text-lg leading-[24px] font-semibold text-[hsl(var(--widget-text))] opacity-95">
+                € 6.93
+              </div>
+            </div>
+            {/* Gas */}
+            <div className="flex flex-col items-center gap-1">
+              <div className="text-[42px] leading-[48px] font-extrabold text-[hsl(var(--widget-text))] tracking-[-0.02em]">
+                8.3 m³
+              </div>
+              <div className="text-lg leading-[24px] font-semibold text-[hsl(var(--widget-text))] opacity-95">
+                € 9.12
+              </div>
+            </div>
           </div>
           <div className="text-sm opacity-95 bg-[hsl(var(--widget-glass))] px-3 py-2 rounded-[10px] max-w-xs">
             Lekker bezig! Met <strong>Slim Sturing</strong> hou je je kosten en CO₂ moeiteloos in toom.
@@ -67,9 +81,16 @@ export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config }) => {
 
         {/* Current Savings Section */}
         <section className="glass-card bg-[hsl(var(--widget-glass))] border border-[hsl(var(--widget-glass-border))] rounded-[var(--inner-radius)] p-5 backdrop-blur-sm relative z-10">
-          <h2 className="text-[22px] font-extrabold text-[hsl(var(--widget-text))] mb-4 tracking-[-0.01em]">
-            Huidige Besparingen
-          </h2>
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-[22px] font-extrabold text-[hsl(var(--widget-text))] tracking-[-0.01em]">
+              Huidige Besparingen
+            </h2>
+            <div className="flex gap-2 text-xs">
+              <button className="px-3 py-1 bg-[hsl(var(--widget-accent))] text-[hsl(var(--widget-text))] rounded-lg font-semibold">Dag</button>
+              <button className="px-3 py-1 text-[hsl(var(--widget-text-muted))] opacity-70 hover:opacity-100">Maand</button>
+              <button className="px-3 py-1 text-[hsl(var(--widget-text-muted))] opacity-70 hover:opacity-100">Jaar</button>
+            </div>
+          </div>
           
           <div className="grid grid-cols-1 gap-6">
             {/* CO2 Savings */}
