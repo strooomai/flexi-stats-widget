@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { WidgetConfig } from '@/types/widget';
 import { Leaf, Euro, Zap } from 'lucide-react';
 
@@ -8,6 +8,7 @@ interface EnergyWidgetProps {
 
 export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config }) => {
   const { theme, logo, texts } = config;
+  const [selectedPeriod, setSelectedPeriod] = useState<'Dag' | 'Maand' | 'Jaar'>('Dag');
 
   // Apply theme CSS variables
   const widgetStyle = {
@@ -86,9 +87,19 @@ export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config }) => {
               Huidige Besparingen
             </h2>
             <div className="flex gap-2 text-xs">
-              <button className="px-3 py-1 bg-[hsl(var(--widget-accent))] text-[hsl(var(--widget-text))] rounded-lg font-semibold">Dag</button>
-              <button className="px-3 py-1 text-[hsl(var(--widget-text-muted))] opacity-70 hover:opacity-100">Maand</button>
-              <button className="px-3 py-1 text-[hsl(var(--widget-text-muted))] opacity-70 hover:opacity-100">Jaar</button>
+              {(['Dag', 'Maand', 'Jaar'] as const).map((period) => (
+                <button
+                  key={period}
+                  onClick={() => setSelectedPeriod(period)}
+                  className={`px-3 py-1 rounded-lg font-semibold transition-all ${
+                    selectedPeriod === period
+                      ? 'bg-[hsl(var(--widget-accent))] text-[hsl(var(--widget-text))]'
+                      : 'text-[hsl(var(--widget-text-muted))] opacity-70 hover:opacity-100'
+                  }`}
+                >
+                  {period}
+                </button>
+              ))}
             </div>
           </div>
           
@@ -162,9 +173,11 @@ export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config }) => {
             </div>
           </div>
 
-          <button className="inline-flex items-center gap-[10px] mt-[6px] font-bold text-sm bg-[hsl(var(--widget-cta-bg))] text-[hsl(var(--widget-cta-text))] border-none rounded-xl py-[10px] px-[14px] cursor-pointer shadow-[0_6px_18px_rgba(0,0,0,0.15)] transition-transform duration-200 hover:-translate-y-0.5">
-            {texts.slimSturingSection.ctaText}
-          </button>
+          <div className="flex justify-center mt-[6px]">
+            <button className="inline-flex items-center gap-[10px] font-bold text-sm bg-[hsl(var(--widget-cta-bg))] text-[hsl(var(--widget-cta-text))] border-none rounded-xl py-[10px] px-[14px] cursor-pointer shadow-[0_6px_18px_rgba(0,0,0,0.15)] transition-transform duration-200 hover:-translate-y-0.5">
+              {texts.slimSturingSection.ctaText}
+            </button>
+          </div>
         </section>
 
         {/* Footer */}
