@@ -5,11 +5,17 @@ import { presetConfigs } from '@/config/widgetPresets';
 import { WidgetConfig } from '@/types/widget';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
+import { Command, CommandGroup, CommandItem, CommandInput, CommandList, CommandEmpty } from '@/components/ui/command';
+import { Checkbox } from '@/components/ui/checkbox';
+// Mode dropdown uses Select
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const Index = () => {
   const [currentConfig, setCurrentConfig] = useState<WidgetConfig>(presetConfigs.kemkens);
+  const [mode, setMode] = useState<'default' | 'hybrid'>('default');
   const [showConfigurator, setShowConfigurator] = useState(false);
+  const [featuresOpen, setFeaturesOpen] = useState(false);
   
   // Setup state
   const [heatPumpType, setHeatPumpType] = useState<'gas' | 'hybrid'>('gas');
@@ -55,6 +61,48 @@ const Index = () => {
                   <SelectItem value="octopus">Octopus</SelectItem>
                 </SelectContent>
               </Select>
+              <Select onValueChange={(v) => setMode(v as 'default' | 'hybrid')} value={mode}>
+                <SelectTrigger className="w-56">
+                  <SelectValue placeholder="Mode" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="default">Gas Only</SelectItem>
+                  <SelectItem value="hybrid">Hybrid Heat pump</SelectItem>
+                </SelectContent>
+              </Select>
+              {/* Additional Features combobox */}
+              <Popover open={featuresOpen} onOpenChange={setFeaturesOpen}>
+                <PopoverTrigger asChild>
+                  <Button variant="outline" className="w-56 justify-between" role="combobox" aria-expanded={featuresOpen}>
+                    Additional Features
+                    <span className="text-xs text-muted-foreground">
+                      {[hasBattery, hasWaterTank, hasAirCo].filter(Boolean).length || 'None'} selected
+                    </span>
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-64 p-0">
+                  <Command>
+                    <CommandInput placeholder="Filter features..." />
+                    <CommandList>
+                      <CommandEmpty>No features found.</CommandEmpty>
+                      <CommandGroup heading="Select features">
+                        <CommandItem className="flex items-center gap-3" onSelect={() => setHasBattery(!hasBattery)}>
+                          <Checkbox checked={hasBattery} onCheckedChange={() => setHasBattery(!hasBattery)} />
+                          <span>Has Battery</span>
+                        </CommandItem>
+                        <CommandItem className="flex items-center gap-3" onSelect={() => setHasWaterTank(!hasWaterTank)}>
+                          <Checkbox checked={hasWaterTank} onCheckedChange={() => setHasWaterTank(!hasWaterTank)} />
+                          <span>Has Water Tank</span>
+                        </CommandItem>
+                        <CommandItem className="flex items-center gap-3" onSelect={() => setHasAirCo(!hasAirCo)}>
+                          <Checkbox checked={hasAirCo} onCheckedChange={() => setHasAirCo(!hasAirCo)} />
+                          <span>Has Air Co</span>
+                        </CommandItem>
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
               <Button 
                 variant="outline" 
                 onClick={() => setShowConfigurator(!showConfigurator)}
@@ -71,77 +119,7 @@ const Index = () => {
 
       <div className="container mx-auto px-4 py-8">
         {/* Setup Selection */}
-        <div className="max-w-2xl mx-auto mb-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>Current Setup:</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {/* Heat Pump Type */}
-              <div>
-                <h3 className="text-lg font-medium mb-3 text-foreground">Heat Pump Type:</h3>
-                <div className="flex gap-6">
-                  <label className="flex items-center space-x-3 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="heatPumpType"
-                      value="gas"
-                      checked={heatPumpType === 'gas'}
-                      onChange={(e) => setHeatPumpType(e.target.value as 'gas' | 'hybrid')}
-                      className="w-4 h-4 text-primary border-border focus:ring-primary"
-                    />
-                    <span className="text-foreground">Gas only Heat pump</span>
-                  </label>
-                  <label className="flex items-center space-x-3 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="heatPumpType"
-                      value="hybrid"
-                      checked={heatPumpType === 'hybrid'}
-                      onChange={(e) => setHeatPumpType(e.target.value as 'gas' | 'hybrid')}
-                      className="w-4 h-4 text-primary border-border focus:ring-primary"
-                    />
-                    <span className="text-foreground">Hybrid Heat pump</span>
-                  </label>
-                </div>
-              </div>
-
-              {/* Additional Features */}
-              <div>
-                <h3 className="text-lg font-medium mb-3 text-foreground">Additional Features:</h3>
-                <div className="flex gap-6">
-                  <label className="flex items-center space-x-3 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={hasBattery}
-                      onChange={(e) => setHasBattery(e.target.checked)}
-                      className="w-4 h-4 text-primary border-border focus:ring-primary rounded"
-                    />
-                    <span className="text-foreground">Has Battery</span>
-                  </label>
-                  <label className="flex items-center space-x-3 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={hasWaterTank}
-                      onChange={(e) => setHasWaterTank(e.target.checked)}
-                      className="w-4 h-4 text-primary border-border focus:ring-primary rounded"
-                    />
-                    <span className="text-foreground">Has Water Tank</span>
-                  </label>
-                  <label className="flex items-center space-x-3 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={hasAirCo}
-                      onChange={(e) => setHasAirCo(e.target.checked)}
-                      className="w-4 h-4 text-primary border-border focus:ring-primary rounded"
-                    />
-                    <span className="text-foreground">Has Air Co</span>
-                  </label>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Widget Preview */}
@@ -152,7 +130,7 @@ const Index = () => {
               </CardHeader>
               <CardContent className="p-0">
                 <div className="bg-gray-100 rounded-lg overflow-hidden">
-                  <EnergyWidget config={currentConfig} />
+                  <EnergyWidget config={currentConfig} mode={mode} />
                 </div>
               </CardContent>
             </Card>
@@ -180,7 +158,7 @@ const Index = () => {
               <CardContent className="p-0 flex-1">
                 <div className="bg-gray-100 rounded-lg overflow-hidden h-full flex items-center justify-center">
                   <div className="transform scale-50 origin-center w-full">
-                    <EnergyWidget config={presetConfigs.kemkens} />
+                  <EnergyWidget config={presetConfigs.kemkens} mode="hybrid" />
                   </div>
                 </div>
               </CardContent>
@@ -193,7 +171,7 @@ const Index = () => {
               <CardContent className="p-0 flex-1">
                 <div className="bg-gray-100 rounded-lg overflow-hidden h-full flex items-center justify-center">
                   <div className="transform scale-50 origin-center w-full">
-                    <EnergyWidget config={presetConfigs.feenstra} />
+                  <EnergyWidget config={presetConfigs.feenstra} mode="hybrid" />
                   </div>
                 </div>
               </CardContent>
@@ -206,7 +184,7 @@ const Index = () => {
               <CardContent className="p-0 flex-1">
                 <div className="bg-gray-100 rounded-lg overflow-hidden h-full flex items-center justify-center">
                   <div className="transform scale-50 origin-center w-full">
-                    <EnergyWidget config={presetConfigs.warmtethuis} />
+                  <EnergyWidget config={presetConfigs.warmtethuis} mode="hybrid" />
                   </div>
                 </div>
               </CardContent>
@@ -219,7 +197,7 @@ const Index = () => {
               <CardContent className="p-0 flex-1">
                 <div className="bg-gray-100 rounded-lg overflow-hidden h-full flex items-center justify-center">
                   <div className="transform scale-50 origin-center w-full">
-                    <EnergyWidget config={presetConfigs.warmland} />
+                  <EnergyWidget config={presetConfigs.warmland} mode="hybrid" />
                   </div>
                 </div>
               </CardContent>
@@ -232,7 +210,7 @@ const Index = () => {
               <CardContent className="p-0 flex-1">
                 <div className="bg-gray-100 rounded-lg overflow-hidden h-full flex items-center justify-center">
                   <div className="transform scale-50 origin-center w-full">
-                    <EnergyWidget config={presetConfigs.octopus} />
+                  <EnergyWidget config={presetConfigs.octopus} mode="hybrid" />
                   </div>
                 </div>
               </CardContent>
