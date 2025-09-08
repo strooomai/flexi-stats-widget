@@ -80,7 +80,7 @@ const Index = () => {
               {/* Heat Pump Type */}
               <div>
                 <h3 className="text-lg font-medium mb-3 text-foreground">Heat Pump Type:</h3>
-                <div className="space-y-3">
+                <div className="flex gap-6">
                   <label className="flex items-center space-x-3 cursor-pointer">
                     <input
                       type="radio"
@@ -109,7 +109,7 @@ const Index = () => {
               {/* Additional Features */}
               <div>
                 <h3 className="text-lg font-medium mb-3 text-foreground">Additional Features:</h3>
-                <div className="space-y-3">
+                <div className="flex gap-6">
                   <label className="flex items-center space-x-3 cursor-pointer">
                     <input
                       type="checkbox"

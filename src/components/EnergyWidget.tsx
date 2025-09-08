@@ -78,7 +78,7 @@ export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config }) => {
           <div className="grid grid-cols-2 gap-8 w-full max-w-md">
             {/* Electricity */}
             <div className="flex flex-col items-center gap-1">
-              <div className="text-[42px] leading-[48px] font-extrabold text-[hsl(var(--widget-text))] tracking-[-0.02em]">
+              <div className="text-[32px] leading-[36px] font-extrabold text-[hsl(var(--widget-text))] tracking-[-0.02em] whitespace-nowrap">
                 {multiplyValue('24.7 kWh', multiplier)}
               </div>
               <div className="text-lg leading-[24px] font-semibold text-[hsl(var(--widget-text))] opacity-95">
@@ -87,7 +87,7 @@ export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config }) => {
             </div>
             {/* Gas */}
             <div className="flex flex-col items-center gap-1">
-              <div className="text-[42px] leading-[48px] font-extrabold text-[hsl(var(--widget-text))] tracking-[-0.02em]">
+              <div className="text-[32px] leading-[36px] font-extrabold text-[hsl(var(--widget-text))] tracking-[-0.02em] whitespace-nowrap">
                 {multiplyValue('8.3 m³', multiplier)}
               </div>
               <div className="text-lg leading-[24px] font-semibold text-[hsl(var(--widget-text))] opacity-95">
