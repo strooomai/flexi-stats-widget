@@ -10,6 +10,26 @@ export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config }) => {
   const { theme, logo, texts } = config;
   const [selectedPeriod, setSelectedPeriod] = useState<'Dag' | 'Maand' | 'Jaar'>('Dag');
 
+  // Calculate multiplier based on selected period
+  const getMultiplier = () => {
+    switch (selectedPeriod) {
+      case 'Maand': return 20;
+      case 'Jaar': return 220;
+      default: return 1;
+    }
+  };
+
+  // Helper function to multiply values in text
+  const multiplyValue = (text: string, multiplier: number) => {
+    return text.replace(/(\d+\.?\d*)/g, (match) => {
+      const num = parseFloat(match);
+      const result = num * multiplier;
+      return result % 1 === 0 ? result.toString() : result.toFixed(1);
+    });
+  };
+
+  const multiplier = getMultiplier();
+
   // Apply theme CSS variables
   const widgetStyle = {
     '--widget-gradient-start': theme.gradientStart,
@@ -59,19 +79,19 @@ export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config }) => {
             {/* Electricity */}
             <div className="flex flex-col items-center gap-1">
               <div className="text-[42px] leading-[48px] font-extrabold text-[hsl(var(--widget-text))] tracking-[-0.02em]">
-                24.7 kWh
+                {multiplyValue('24.7 kWh', multiplier)}
               </div>
               <div className="text-lg leading-[24px] font-semibold text-[hsl(var(--widget-text))] opacity-95">
-                € 6.93
+                {multiplyValue('€ 6.93', multiplier)}
               </div>
             </div>
             {/* Gas */}
             <div className="flex flex-col items-center gap-1">
               <div className="text-[42px] leading-[48px] font-extrabold text-[hsl(var(--widget-text))] tracking-[-0.02em]">
-                8.3 m³
+                {multiplyValue('8.3 m³', multiplier)}
               </div>
               <div className="text-lg leading-[24px] font-semibold text-[hsl(var(--widget-text))] opacity-95">
-                € 9.12
+                {multiplyValue('€ 9.12', multiplier)}
               </div>
             </div>
           </div>
@@ -111,7 +131,7 @@ export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config }) => {
               </div>
               <div className="flex items-center gap-2 text-[30px] font-extrabold text-[hsl(var(--widget-text))] mb-1">
                 <Leaf className="w-[22px] h-[22px]" />
-                {texts.co2Section.value}
+                {multiplyValue(texts.co2Section.value, multiplier)}
               </div>
               <div className="text-xs text-[hsl(var(--widget-text-muted))] opacity-95">
                 {texts.co2Section.description}
@@ -125,7 +145,7 @@ export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config }) => {
               </div>
               <div className="flex items-center gap-2 text-[30px] font-extrabold text-[hsl(var(--widget-text))] mb-1">
                 <Zap className="w-[22px] h-[22px]" />
-                {texts.gasSection.value}
+                {multiplyValue(texts.gasSection.value, multiplier)}
               </div>
               <div className="text-xs text-[hsl(var(--widget-text-muted))] opacity-95">
                 {texts.gasSection.description}
@@ -151,7 +171,7 @@ export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config }) => {
               </div>
               <div className="flex items-center gap-2 text-[30px] font-extrabold text-[hsl(var(--widget-text))]">
                 <Euro className="w-[22px] h-[22px]" />
-                {texts.slimSturingSection.gasSaving.value}
+                {multiplyValue(texts.slimSturingSection.gasSaving.value, multiplier)}
               </div>
               <div className="text-xs text-[hsl(var(--widget-text-muted))] opacity-95">
                 {texts.slimSturingSection.gasSaving.note}
@@ -165,7 +185,7 @@ export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config }) => {
               </div>
               <div className="flex items-center gap-2 text-[30px] font-extrabold text-[hsl(var(--widget-text))]">
                 <Leaf className="w-[22px] h-[22px]" />
-                {texts.slimSturingSection.co2Saving.value}
+                {multiplyValue(texts.slimSturingSection.co2Saving.value, multiplier)}
               </div>
               <div className="text-xs text-[hsl(var(--widget-text-muted))] opacity-95">
                 {texts.slimSturingSection.co2Saving.note}
