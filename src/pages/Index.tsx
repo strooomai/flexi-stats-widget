@@ -10,6 +10,12 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 const Index = () => {
   const [currentConfig, setCurrentConfig] = useState<WidgetConfig>(presetConfigs.kemkens);
   const [showConfigurator, setShowConfigurator] = useState(false);
+  
+  // Setup state
+  const [heatPumpType, setHeatPumpType] = useState<'gas' | 'hybrid'>('gas');
+  const [hasBattery, setHasBattery] = useState(false);
+  const [hasWaterTank, setHasWaterTank] = useState(false);
+  const [hasAirCo, setHasAirCo] = useState(false);
 
   const loadPreset = (presetName: string) => {
     setCurrentConfig(presetConfigs[presetName as keyof typeof presetConfigs]);
@@ -64,6 +70,79 @@ const Index = () => {
       </header>
 
       <div className="container mx-auto px-4 py-8">
+        {/* Setup Selection */}
+        <div className="max-w-2xl mx-auto mb-8">
+          <Card>
+            <CardHeader>
+              <CardTitle>Current Setup:</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* Heat Pump Type */}
+              <div>
+                <h3 className="text-lg font-medium mb-3 text-foreground">Heat Pump Type:</h3>
+                <div className="space-y-3">
+                  <label className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="heatPumpType"
+                      value="gas"
+                      checked={heatPumpType === 'gas'}
+                      onChange={(e) => setHeatPumpType(e.target.value as 'gas' | 'hybrid')}
+                      className="w-4 h-4 text-primary border-border focus:ring-primary"
+                    />
+                    <span className="text-foreground">Gas only Heat pump</span>
+                  </label>
+                  <label className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="heatPumpType"
+                      value="hybrid"
+                      checked={heatPumpType === 'hybrid'}
+                      onChange={(e) => setHeatPumpType(e.target.value as 'gas' | 'hybrid')}
+                      className="w-4 h-4 text-primary border-border focus:ring-primary"
+                    />
+                    <span className="text-foreground">Hybrid Heat pump</span>
+                  </label>
+                </div>
+              </div>
+
+              {/* Additional Features */}
+              <div>
+                <h3 className="text-lg font-medium mb-3 text-foreground">Additional Features:</h3>
+                <div className="space-y-3">
+                  <label className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={hasBattery}
+                      onChange={(e) => setHasBattery(e.target.checked)}
+                      className="w-4 h-4 text-primary border-border focus:ring-primary rounded"
+                    />
+                    <span className="text-foreground">Has Battery</span>
+                  </label>
+                  <label className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={hasWaterTank}
+                      onChange={(e) => setHasWaterTank(e.target.checked)}
+                      className="w-4 h-4 text-primary border-border focus:ring-primary rounded"
+                    />
+                    <span className="text-foreground">Has Water Tank</span>
+                  </label>
+                  <label className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={hasAirCo}
+                      onChange={(e) => setHasAirCo(e.target.checked)}
+                      className="w-4 h-4 text-primary border-border focus:ring-primary rounded"
+                    />
+                    <span className="text-foreground">Has Air Co</span>
+                  </label>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Widget Preview */}
           <div className="order-2 lg:order-1">
