@@ -5,9 +5,10 @@ import { Leaf, Euro, Zap } from 'lucide-react';
 interface EnergyWidgetProps {
   config: WidgetConfig;
   mode?: 'default' | 'hybrid'; // 'default' is Gas Only
+  embed?: boolean; // compact embed inside a page/card
 }
 
-export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config, mode = 'default' }) => {
+export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config, mode = 'default', embed = false }) => {
   const { theme, logo, texts } = config;
   const [selectedPeriod, setSelectedPeriod] = useState<'Dag' | 'Maand' | 'Jaar'>('Dag');
 
@@ -45,11 +46,15 @@ export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config, mode = 'defa
     '--widget-gradient-end': theme.gradientEnd,
     '--widget-text': theme.textColor,
     '--widget-text-muted': theme.textMuted,
+    '--widget-card-text': theme.cardText ?? theme.textColor,
+    '--widget-card-text-muted': theme.cardTextMuted ?? theme.textMuted,
     '--widget-glass': theme.glassBackground,
     '--widget-glass-border': theme.glassBorder,
     '--widget-accent': theme.accentColor,
     '--widget-cta-bg': theme.ctaBackground,
     '--widget-cta-text': theme.ctaText,
+    '--widget-accent-text': theme.accentText ?? theme.textColor,
+    '--widget-period-text': theme.periodText ?? theme.textMuted,
     '--card-radius': '24px',
     '--inner-radius': '18px',
     '--pad': '24px',
@@ -57,10 +62,27 @@ export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config, mode = 'defa
     '--gap-md': '14px',
   } as React.CSSProperties;
 
+  const wrapperClasses = embed
+    ? 'w-full bg-transparent flex justify-center p-4'
+    : 'min-h-screen bg-background flex items-center justify-center p-8';
+
+  const cardClasses = [
+    'widget-card',
+    'max-w-[560px]',
+    'w-full',
+    embed ? '' : 'min-h-[600px]',
+    'rounded-[var(--card-radius)]',
+    'p-[var(--pad)]',
+    'flex flex-col gap-[var(--gap-lg)]',
+    'shadow-2xl relative overflow-hidden',
+  ]
+    .filter(Boolean)
+    .join(' ');
+
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-8">
+    <div className={wrapperClasses}>
       <div 
-        className="widget-card max-w-[560px] w-full min-h-[600px] rounded-[var(--card-radius)] p-[var(--pad)] flex flex-col gap-[var(--gap-lg)] shadow-2xl relative overflow-hidden"
+        className={cardClasses}
         style={widgetStyle}
       >
         {/* Decorative blob */}
@@ -74,7 +96,10 @@ export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config, mode = 'defa
               <span className="text-xs font-bold text-[hsl(var(--widget-text))] leading-none">Live</span>
             </div>
           </div>
-          <div className="flex items-center justify-between gap-3 mb-[6px]">
+          <p className="text-sm leading-5 text-[hsl(var(--widget-text-muted))] opacity-95 mb-[6px]">
+            {texts.subtitle}
+          </p>
+          <div className="flex items-center justify-between gap-3">
             <h1 className="text-[28px] leading-[34px] font-extrabold text-[hsl(var(--widget-text))] tracking-[-0.01em]">
               {dynamicTitle}
             </h1>
@@ -85,8 +110,8 @@ export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config, mode = 'defa
                   onClick={() => setSelectedPeriod(period)}
                   className={`px-3 py-1 rounded-lg font-semibold transition-all ${
                     selectedPeriod === period
-                      ? 'bg-[hsl(var(--widget-accent))] text-[hsl(var(--widget-text))]'
-                      : 'text-[hsl(var(--widget-text-muted))] opacity-70 hover:opacity-100'
+                      ? 'bg-[hsl(var(--widget-accent))] text-[hsl(var(--widget-accent-text))]'
+                      : 'text-[hsl(var(--widget-period-text))] opacity-70 hover:opacity-100'
                   }`}
                 >
                   {period}
@@ -94,9 +119,6 @@ export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config, mode = 'defa
               ))}
             </div>
           </div>
-          <p className="text-sm leading-5 text-[hsl(var(--widget-text-muted))] opacity-95">
-            {texts.subtitle}
-          </p>
         </header>
 
         {/* Current Consumption Metrics */}
@@ -135,7 +157,7 @@ export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config, mode = 'defa
         {/* Current Section */}
         <section className="glass-card bg-[hsl(var(--widget-glass))] border border-[hsl(var(--widget-glass-border))] rounded-[var(--inner-radius)] p-5 backdrop-blur-sm relative z-10">
           <div className="flex items-center mb-4">
-            <h2 className="text-[22px] font-extrabold text-[hsl(var(--widget-text))] tracking-[-0.01em]">
+            <h2 className="text-[22px] font-extrabold text-[hsl(var(--widget-card-text))] tracking-[-0.01em]">
               {mode === 'hybrid' ? 'Huidige Besparingen' : 'Potentiele Besparingen met Elga ACE'}
             </h2>
           </div>
@@ -145,19 +167,19 @@ export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config, mode = 'defa
               <>
                 {/* Default (Gas Only) */}
                 <div className="saving-item">
-                  <div className="text-[13px] font-bold text-[hsl(var(--widget-text-muted))] uppercase tracking-[0.04em] opacity-95 mb-[6px]">
+                  <div className="text-[13px] font-bold text-[hsl(var(--widget-card-text-muted))] uppercase tracking-[0.04em] opacity-95 mb-[6px]">
                     Potentiële gasverbruik besparing
                   </div>
-                  <div className="flex items-center gap-2 text-[30px] font-extrabold text-[hsl(var(--widget-text))] mb-1">
+                  <div className="flex items-center gap-2 text-[30px] font-extrabold text-[hsl(var(--widget-card-text))] mb-1">
                     <Zap className="w-[22px] h-[22px]" />
                     {multiplyValue(texts.gasSection.value, multiplier)}
                   </div>
                 </div>
                 <div className="saving-item">
-                  <div className="text-[13px] font-bold text-[hsl(var(--widget-text-muted))] uppercase tracking-[0.04em] opacity-95 mb-[6px]">
+                  <div className="text-[13px] font-bold text-[hsl(var(--widget-card-text-muted))] uppercase tracking-[0.04em] opacity-95 mb-[6px]">
                     Potentiële CO2-uitstoot besparing
                   </div>
-                  <div className="flex items-center gap-2 text-[30px] font-extrabold text-[hsl(var(--widget-text))] mb-1">
+                  <div className="flex items-center gap-2 text-[30px] font-extrabold text-[hsl(var(--widget-card-text))] mb-1">
                     <Leaf className="w-[22px] h-[22px]" />
                     {multiplyValue(texts.co2Section.value, multiplier)}
                   </div>
@@ -167,26 +189,26 @@ export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config, mode = 'defa
               <>
                 {/* Hybrid - Savings with period multiplier */}
                 <div className="saving-item">
-                  <div className="text-[13px] font-bold text-[hsl(var(--widget-text-muted))] uppercase tracking-[0.04em] opacity-95 mb-[6px]">
+                  <div className="text-[13px] font-bold text-[hsl(var(--widget-card-text-muted))] uppercase tracking-[0.04em] opacity-95 mb-[6px]">
                     {texts.gasSection.title}
                   </div>
-                  <div className="flex items-center gap-2 text-[30px] font-extrabold text-[hsl(var(--widget-text))] mb-1">
+                  <div className="flex items-center gap-2 text-[30px] font-extrabold text-[hsl(var(--widget-card-text))] mb-1">
                     <Zap className="w-[22px] h-[22px]" />
                     {multiplyValue(texts.gasSection.value, multiplier)}
                   </div>
-                  <div className="text-xs text-[hsl(var(--widget-text-muted))] opacity-95">
+                  <div className="text-xs text-[hsl(var(--widget-card-text-muted))] opacity-95">
                     {texts.gasSection.description}
                   </div>
                 </div>
                 <div className="saving-item">
-                  <div className="text-[13px] font-bold text-[hsl(var(--widget-text-muted))] uppercase tracking-[0.04em] opacity-95 mb-[6px]">
+                  <div className="text-[13px] font-bold text-[hsl(var(--widget-card-text-muted))] uppercase tracking-[0.04em] opacity-95 mb-[6px]">
                     {texts.co2Section.title}
                   </div>
-                  <div className="flex items-center gap-2 text-[30px] font-extrabold text-[hsl(var(--widget-text))] mb-1">
+                  <div className="flex items-center gap-2 text-[30px] font-extrabold text-[hsl(var(--widget-card-text))] mb-1">
                     <Leaf className="w-[22px] h-[22px]" />
                     {multiplyValue(texts.co2Section.value, multiplier)}
                   </div>
-                  <div className="text-xs text-[hsl(var(--widget-text-muted))] opacity-95">
+                  <div className="text-xs text-[hsl(var(--widget-card-text-muted))] opacity-95">
                     {texts.co2Section.description}
                   </div>
                 </div>
@@ -198,38 +220,38 @@ export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config, mode = 'defa
         {/* Slim Sturing Section (only in hybrid mode) */}
         {mode === 'hybrid' && (
         <section className="glass-card bg-[hsl(var(--widget-glass))] border border-[hsl(var(--widget-glass-border))] rounded-[var(--inner-radius)] p-5 backdrop-blur-sm relative z-10">
-          <h2 className="text-[22px] font-extrabold text-[hsl(var(--widget-text))] mb-1 tracking-[-0.01em]">
+          <h2 className="text-[22px] font-extrabold text-[hsl(var(--widget-card-text))] mb-1 tracking-[-0.01em]">
             {texts.slimSturingSection.title}
           </h2>
-          <p className="text-sm text-[hsl(var(--widget-text-muted))] opacity-95 mb-[var(--gap-md)]">
+          <p className="text-sm text-[hsl(var(--widget-card-text-muted))] opacity-95 mb-[var(--gap-md)]">
             {texts.slimSturingSection.subtitle}
           </p>
 
           <div className="flex gap-6 flex-wrap mb-[6px]">
             {/* Gas Saving */}
             <div className="flex flex-col gap-[6px] min-w-[180px] flex-1">
-              <div className="text-[13px] font-bold text-[hsl(var(--widget-text-muted))] uppercase tracking-[0.04em] opacity-95">
+              <div className="text-[13px] font-bold text-[hsl(var(--widget-card-text-muted))] uppercase tracking-[0.04em] opacity-95">
                 {texts.slimSturingSection.gasSaving.label}
               </div>
-              <div className="flex items-center gap-2 text-[30px] font-extrabold text-[hsl(var(--widget-text))]">
+              <div className="flex items-center gap-2 text-[30px] font-extrabold text-[hsl(var(--widget-card-text))]">
                 <Euro className="w-[22px] h-[22px]" />
                 {multiplyValue(texts.slimSturingSection.gasSaving.value, multiplier)}
               </div>
-              <div className="text-xs text-[hsl(var(--widget-text-muted))] opacity-95">
+              <div className="text-xs text-[hsl(var(--widget-card-text-muted))] opacity-95">
                 {texts.slimSturingSection.gasSaving.note}
               </div>
             </div>
 
             {/* CO2 Saving */}
             <div className="flex flex-col gap-[6px] min-w-[180px] flex-1">
-              <div className="text-[13px] font-bold text-[hsl(var(--widget-text-muted))] uppercase tracking-[0.04em] opacity-95">
+              <div className="text-[13px] font-bold text-[hsl(var(--widget-card-text-muted))] uppercase tracking-[0.04em] opacity-95">
                 {texts.slimSturingSection.co2Saving.label}
               </div>
-              <div className="flex items-center gap-2 text-[30px] font-extrabold text-[hsl(var(--widget-text))]">
+              <div className="flex items-center gap-2 text-[30px] font-extrabold text-[hsl(var(--widget-card-text))]">
                 <Leaf className="w-[22px] h-[22px]" />
                 {multiplyValue(texts.slimSturingSection.co2Saving.value, multiplier)}
               </div>
-              <div className="text-xs text-[hsl(var(--widget-text-muted))] opacity-95">
+              <div className="text-xs text-[hsl(var(--widget-card-text-muted))] opacity-95">
                 {texts.slimSturingSection.co2Saving.note}
               </div>
             </div>
@@ -246,14 +268,21 @@ export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config, mode = 'defa
         {/* Footer */}
         <footer className="text-center text-xs text-[hsl(var(--widget-text-muted))] opacity-95 mt-auto relative z-10 flex flex-col items-center gap-2">
           <p>{texts.footer}</p>
-          {logo.url && (
-            <img 
-              src={logo.url} 
-              alt={logo.alt} 
-              className="w-24 h-auto opacity-90 drop-shadow-[0_2px_6px_rgba(0,0,0,0.2)]"
-              style={{ width: logo.width ? `${logo.width}px` : '96px' }}
-            />
-          )}
+          {logo.url && (() => {
+            const computedLogoStyle: React.CSSProperties = logo.width
+              ? { width: `${logo.width}px`, height: 'auto' }
+              : { height: '24px', width: 'auto' };
+            return (
+              <div className="bg-[hsl(var(--widget-glass))] border border-[hsl(var(--widget-glass-border))] rounded-md px-2 py-1 backdrop-blur-sm shadow-sm">
+                <img
+                  src={logo.url}
+                  alt={logo.alt}
+                  className="opacity-100"
+                  style={computedLogoStyle}
+                />
+              </div>
+            );
+          })()}
         </footer>
       </div>
 

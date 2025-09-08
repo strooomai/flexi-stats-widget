@@ -9,6 +9,11 @@ export interface WidgetTheme {
   accentColor: string;
   ctaBackground: string;
   ctaText: string;
+  // Optional fine-grained controls
+  accentText?: string; // text color when on accent backgrounds (e.g., selected chips)
+  periodText?: string; // text color for Dag/Maand/Jaar chips (unselected)
+  cardText?: string; // primary text color inside glass cards
+  cardTextMuted?: string; // muted text color inside glass cards
 }
 
 export interface WidgetConfig {

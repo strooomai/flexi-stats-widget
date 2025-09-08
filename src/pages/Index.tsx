@@ -12,9 +12,8 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const Index = () => {
-  const [currentConfig, setCurrentConfig] = useState<WidgetConfig>(presetConfigs.kemkens);
+  const [currentConfig, setCurrentConfig] = useState<WidgetConfig>(presetConfigs.remeha);
   const [mode, setMode] = useState<'default' | 'hybrid'>('default');
-  const [showConfigurator, setShowConfigurator] = useState(false);
   const [featuresOpen, setFeaturesOpen] = useState(false);
   
   // Setup state
@@ -49,14 +48,22 @@ const Index = () => {
               <p className="text-muted-foreground">Customize your white-label energy widget</p>
             </div>
             <div className="flex items-center gap-4">
-              <Select onValueChange={loadPreset} defaultValue="kemkens">
+              <Select onValueChange={loadPreset} defaultValue="remeha">
                 <SelectTrigger className="w-40">
                   <SelectValue placeholder="Load preset" />
                 </SelectTrigger>
                 <SelectContent>
+                  <SelectItem value="remeha">Remeha</SelectItem>
                   <SelectItem value="kemkens">Kemkens</SelectItem>
+                  <SelectItem value="essent">Essent</SelectItem>
+                  <SelectItem value="dedietrich">De Dietrich</SelectItem>
+                  <SelectItem value="heattransformers">HeatTransformers</SelectItem>                                    
                   <SelectItem value="feenstra">Feenstra</SelectItem>
-                  <SelectItem value="warmtethuis">WarmteThuis</SelectItem>
+                  <SelectItem value="fctwente">FC Twente</SelectItem>
+                  <SelectItem value="eneco">Eneco</SelectItem>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="baxi">Baxi</SelectItem>
+                  <SelectItem value="warmtethuis">WarmteThuis</SelectItem>                  
                   <SelectItem value="warmland">Warmland</SelectItem>
                   <SelectItem value="octopus">Octopus</SelectItem>
                 </SelectContent>
@@ -103,12 +110,6 @@ const Index = () => {
                   </Command>
                 </PopoverContent>
               </Popover>
-              <Button 
-                variant="outline" 
-                onClick={() => setShowConfigurator(!showConfigurator)}
-              >
-                {showConfigurator ? 'Hide' : 'Show'} Configurator
-              </Button>
               <Button onClick={exportConfig}>
                 Export Config
               </Button>
@@ -130,21 +131,19 @@ const Index = () => {
               </CardHeader>
               <CardContent className="p-0">
                 <div className="bg-gray-100 rounded-lg overflow-hidden">
-                  <EnergyWidget config={currentConfig} mode={mode} />
+                  <EnergyWidget config={currentConfig} mode={mode} embed />
                 </div>
               </CardContent>
             </Card>
           </div>
 
-          {/* Configurator */}
-          {showConfigurator && (
-            <div className="order-1 lg:order-2">
-              <WidgetConfigurator 
-                config={currentConfig}
-                onConfigChange={setCurrentConfig}
-              />
-            </div>
-          )}
+          {/* Configurator - always visible */}
+          <div className="order-1 lg:order-2">
+            <WidgetConfigurator 
+              config={currentConfig}
+              onConfigChange={setCurrentConfig}
+            />
+          </div>
         </div>
 
         {/* Preset Examples - Square Layout */}
@@ -153,17 +152,55 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card className="aspect-square">
               <CardHeader className="pb-3">
+                <CardTitle className="text-yellow-500 text-base">Remeha</CardTitle>
+              </CardHeader>
+              <CardContent className="p-0 flex-1">
+                <div className="bg-gray-100 rounded-lg overflow-hidden h-full flex items-center justify-center">
+                  <div className="transform scale-50 origin-center w-full">
+                  <EnergyWidget config={presetConfigs.remeha} mode="hybrid" embed />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="aspect-square">
+              <CardHeader className="pb-3">
                 <CardTitle className="text-pink-600 text-base">Kemkens</CardTitle>
               </CardHeader>
               <CardContent className="p-0 flex-1">
                 <div className="bg-gray-100 rounded-lg overflow-hidden h-full flex items-center justify-center">
                   <div className="transform scale-50 origin-center w-full">
-                  <EnergyWidget config={presetConfigs.kemkens} mode="hybrid" />
+                  <EnergyWidget config={presetConfigs.kemkens} mode="hybrid" embed />
                   </div>
                 </div>
               </CardContent>
             </Card>
-            
+
+            <Card className="aspect-square">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-pink-600 text-base">Essent</CardTitle>
+              </CardHeader>
+              <CardContent className="p-0 flex-1">
+                <div className="bg-gray-100 rounded-lg overflow-hidden h-full flex items-center justify-center">
+                  <div className="transform scale-50 origin-center w-full">
+                  <EnergyWidget config={presetConfigs.essent} mode="hybrid" embed />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="aspect-square">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-neutral-700 text-base">Apple</CardTitle>
+              </CardHeader>
+              <CardContent className="p-0 flex-1">
+                <div className="bg-gray-100 rounded-lg overflow-hidden h-full flex items-center justify-center">
+                  <div className="transform scale-50 origin-center w-full">
+                  <EnergyWidget config={presetConfigs.apple} mode="hybrid" embed />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
             <Card className="aspect-square">
               <CardHeader className="pb-3">
                 <CardTitle className="text-red-600 text-base">Feenstra</CardTitle>
@@ -171,12 +208,12 @@ const Index = () => {
               <CardContent className="p-0 flex-1">
                 <div className="bg-gray-100 rounded-lg overflow-hidden h-full flex items-center justify-center">
                   <div className="transform scale-50 origin-center w-full">
-                  <EnergyWidget config={presetConfigs.feenstra} mode="hybrid" />
+                  <EnergyWidget config={presetConfigs.feenstra} mode="hybrid" embed />
                   </div>
                 </div>
               </CardContent>
             </Card>
-            
+
             <Card className="aspect-square">
               <CardHeader className="pb-3">
                 <CardTitle className="text-yellow-600 text-base">WarmteThuis</CardTitle>
@@ -184,12 +221,77 @@ const Index = () => {
               <CardContent className="p-0 flex-1">
                 <div className="bg-gray-100 rounded-lg overflow-hidden h-full flex items-center justify-center">
                   <div className="transform scale-50 origin-center w-full">
-                  <EnergyWidget config={presetConfigs.warmtethuis} mode="hybrid" />
+                  <EnergyWidget config={presetConfigs.warmtethuis} mode="hybrid" embed />
                   </div>
                 </div>
               </CardContent>
             </Card>
-            
+
+            <Card className="aspect-square">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-red-600 text-base">FC Twente</CardTitle>
+              </CardHeader>
+              <CardContent className="p-0 flex-1">
+                <div className="bg-gray-100 rounded-lg overflow-hidden h-full flex items-center justify-center">
+                  <div className="transform scale-50 origin-center w-full">
+                  <EnergyWidget config={presetConfigs.fctwente} mode="hybrid" embed />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="aspect-square">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-fuchsia-600 text-base">Eneco</CardTitle>
+              </CardHeader>
+              <CardContent className="p-0 flex-1">
+                <div className="bg-gray-100 rounded-lg overflow-hidden h-full flex items-center justify-center">
+                  <div className="transform scale-50 origin-center w-full">
+                  <EnergyWidget config={presetConfigs.eneco} mode="hybrid" embed />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="aspect-square">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-sky-600 text-base">HeatTransformers</CardTitle>
+              </CardHeader>
+              <CardContent className="p-0 flex-1">
+                <div className="bg-gray-100 rounded-lg overflow-hidden h-full flex items-center justify-center">
+                  <div className="transform scale-50 origin-center w-full">
+                  <EnergyWidget config={presetConfigs.heattransformers} mode="hybrid" embed />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="aspect-square">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-sky-700 text-base">Baxi</CardTitle>
+              </CardHeader>
+              <CardContent className="p-0 flex-1">
+                <div className="bg-gray-100 rounded-lg overflow-hidden h-full flex items-center justify-center">
+                  <div className="transform scale-50 origin-center w-full">
+                  <EnergyWidget config={presetConfigs.baxi} mode="hybrid" embed />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="aspect-square">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-slate-600 text-base">De Dietrich</CardTitle>
+              </CardHeader>
+              <CardContent className="p-0 flex-1">
+                <div className="bg-gray-100 rounded-lg overflow-hidden h-full flex items-center justify-center">
+                  <div className="transform scale-50 origin-center w-full">
+                  <EnergyWidget config={presetConfigs.dedietrich} mode="hybrid" embed />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
             <Card className="aspect-square">
               <CardHeader className="pb-3">
                 <CardTitle className="text-orange-600 text-base">Warmland</CardTitle>
@@ -197,12 +299,12 @@ const Index = () => {
               <CardContent className="p-0 flex-1">
                 <div className="bg-gray-100 rounded-lg overflow-hidden h-full flex items-center justify-center">
                   <div className="transform scale-50 origin-center w-full">
-                  <EnergyWidget config={presetConfigs.warmland} mode="hybrid" />
+                  <EnergyWidget config={presetConfigs.warmland} mode="hybrid" embed />
                   </div>
                 </div>
               </CardContent>
             </Card>
-            
+
             <Card className="aspect-square">
               <CardHeader className="pb-3">
                 <CardTitle className="text-purple-600 text-base">Octopus</CardTitle>
@@ -210,7 +312,7 @@ const Index = () => {
               <CardContent className="p-0 flex-1">
                 <div className="bg-gray-100 rounded-lg overflow-hidden h-full flex items-center justify-center">
                   <div className="transform scale-50 origin-center w-full">
-                  <EnergyWidget config={presetConfigs.octopus} mode="hybrid" />
+                  <EnergyWidget config={presetConfigs.octopus} mode="hybrid" embed />
                   </div>
                 </div>
               </CardContent>
