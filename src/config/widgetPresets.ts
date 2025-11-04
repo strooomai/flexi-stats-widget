@@ -165,6 +165,118 @@ export const remehaConfig: WidgetConfig = {
   },
 };
 
+
+
+// Van Wijnen theme
+export const vanWijnenConfig: WidgetConfig = {
+  theme: {
+    name: 'Van Wijnen',
+    gradientStart: '211 100% 35%',  // Blue
+    gradientEnd: '211 100% 45%',
+    textColor: '0 0% 100%',
+    textMuted: '0 0% 100% / 0.95',
+    glassBackground: '255 255 255 / 0.09',
+    glassBorder: '255 255 255 / 0.25',
+    accentColor: '142 76% 73%',
+    ctaBackground: '0 0% 100%',
+    ctaText: '211 100% 25%',
+  },
+  logo: {
+    url: 'https://edge.sitecorecloud.io/vanwijnengroep1-vanwijnendidf3d-production-239b/media/project/van-wijnen-groep/corporate/van-wijnen.svg?iar=0',
+    alt: 'Van Wijnen logo',
+    width: 120,
+  },
+  texts: {
+    title: 'Energie Vandaag',
+    subtitle: 'Real-time verbruiksmonitoring',
+    co2Section: {
+      title: 'Besparing CO2-uitstoot',
+      value: '11.5 kg',
+      description: 'Vandaag al bespaard door slim energiegebruik',
+    },
+    gasSection: {
+      title: 'Besparing gasverbruik',
+      value: '€ 3.08',
+      description: 'Bespaard op gaskosten vandaag',
+    },
+    slimSturingSection: {
+      title: 'Slim Sturing',
+      subtitle: 'Jouw potentiële besparingen, vandaag',
+      gasSaving: {
+        label: 'Geld Bespaard',
+        value: '€2.25',
+        note: '≈34% reductie',
+      },
+      co2Saving: {
+        label: 'CO₂ Bespaard',
+        value: '4.9 kg',
+        note: 'Minder uitstoot, zelfde comfort',
+      },
+      ctaText: 'Activeer Slim Sturing',
+    },
+    footer: 'Live updates • Powered by Van Wijnen',
+  },
+};
+
+// Wold&Waard theme
+export const woldWaardConfig: WidgetConfig = {
+  theme: {
+    name: 'Wold&Waard',
+    gradientStart: '142 71% 45%',  // Green
+    gradientEnd: '142 71% 55%',
+    textColor: '0 0% 100%',
+    textMuted: '0 0% 100% / 0.95',
+    glassBackground: '255 255 255 / 0.09',
+    glassBorder: '255 255 255 / 0.25',
+    accentColor: '0 0% 100%',
+    accentText: '142 71% 25%',
+    periodText: '0 0% 100% / 0.9',
+    ctaBackground: '0 0% 100%',
+    ctaText: '142 71% 25%',
+  },
+  logo: {
+    url: 'https://www.woldwaard.nl/assets/images/logo.png?v=a4e230a46ab8b6a1f5268f3291abbd8d49f646199dcda0cbc8011fcc819ae6dc',
+    alt: 'Wold&Waard logo',
+    width: 96,
+  },
+  texts: {
+    title: 'Energie Vandaag',
+    subtitle: 'Real-time verbruiksmonitoring',
+    co2Section: {
+      title: 'Besparing CO2-uitstoot',
+      value: '10.7 kg',
+      description: 'Vandaag al bespaard door slim energiegebruik',
+    },
+    gasSection: {
+      title: 'Besparing gasverbruik',
+      value: '€ 2.98',
+      description: 'Bespaard op gaskosten vandaag',
+    },
+    slimSturingSection: {
+      title: 'Slim Sturing',
+      subtitle: 'Jouw potentiële besparingen, vandaag',
+      gasSaving: {
+        label: 'Geld Bespaard',
+        value: '€2.18',
+        note: '≈33% reductie',
+      },
+      co2Saving: {
+        label: 'CO₂ Bespaard',
+        value: '4.6 kg',
+        note: 'Minder uitstoot, zelfde comfort',
+      },
+      ctaText: 'Activeer Slim Sturing',
+    },
+    footer: 'Live updates • Powered by Wold&Waard',
+  },
+};
+
+
+
+
+
+
+
 // Pink theme (Kemkens style)
 export const kemkensConfig: WidgetConfig = {
   theme: {
