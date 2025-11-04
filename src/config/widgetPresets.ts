@@ -167,17 +167,19 @@ export const remehaConfig: WidgetConfig = {
 
 
 
+
+
 // Van Wijnen theme
 export const vanWijnenConfig: WidgetConfig = {
   theme: {
     name: 'Van Wijnen',
-    gradientStart: '211 100% 35%',  // Blue
-    gradientEnd: '211 100% 45%',
+    gradientStart: '350 94% 32%',  // Blue
+    gradientEnd: '350 94% 48%',
     textColor: '0 0% 100%',
     textMuted: '0 0% 100% / 0.95',
     glassBackground: '255 255 255 / 0.09',
     glassBorder: '255 255 255 / 0.25',
-    accentColor: '142 76% 73%',
+    accentColor: '0 0% 12%',
     ctaBackground: '0 0% 100%',
     ctaText: '211 100% 25%',
   },
@@ -222,8 +224,8 @@ export const vanWijnenConfig: WidgetConfig = {
 export const woldWaardConfig: WidgetConfig = {
   theme: {
     name: 'Wold&Waard',
-    gradientStart: '142 71% 45%',  // Green
-    gradientEnd: '142 71% 55%',
+    gradientStart: '0 0% 31%',  // Green
+    gradientEnd: '0 15% 43%',
     textColor: '0 0% 100%',
     textMuted: '0 0% 100% / 0.95',
     glassBackground: '255 255 255 / 0.09',
@@ -231,7 +233,7 @@ export const woldWaardConfig: WidgetConfig = {
     accentColor: '0 0% 100%',
     accentText: '142 71% 25%',
     periodText: '0 0% 100% / 0.9',
-    ctaBackground: '0 0% 100%',
+    ctaBackground: '0 0% 94%',
     ctaText: '142 71% 25%',
   },
   logo: {
