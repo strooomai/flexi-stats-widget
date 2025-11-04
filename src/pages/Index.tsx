@@ -54,6 +54,8 @@ const Index = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="remeha">Remeha</SelectItem>
+                  <SelectItem value="vanWijnen">Van Wijnen</SelectItem>
+                  <SelectItem value="woldWaard">Wold & Waard</SelectItem>
                   <SelectItem value="kemkens">Kemkens</SelectItem>
                   <SelectItem value="essent">Essent</SelectItem>
                   <SelectItem value="dedietrich">De Dietrich</SelectItem>
