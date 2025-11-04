@@ -791,7 +791,7 @@ export const deDietrichConfig: WidgetConfig = {
 
 export const presetConfigs = {
   remeha: remehaConfig,
-  wanWijnen: vanWijnenConfig,
+  vanWijnen: vanWijnenConfig,
   woldWaard: woldWaardConfig,
   kemkens: kemkensConfig,
   feenstra: feenstraConfig,

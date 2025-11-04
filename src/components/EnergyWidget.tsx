@@ -158,7 +158,7 @@ export const EnergyWidget: React.FC<EnergyWidgetProps> = ({ config, mode = 'defa
         <section className="glass-card bg-[hsl(var(--widget-glass))] border border-[hsl(var(--widget-glass-border))] rounded-[var(--inner-radius)] p-5 backdrop-blur-sm relative z-10">
           <div className="flex items-center mb-4">
             <h2 className="text-[22px] font-extrabold text-[hsl(var(--widget-card-text))] tracking-[-0.01em]">
-              {mode === 'hybrid' ? 'Huidige Besparingen' : 'Potentiele Besparingen met Elga ACE'}
+              {mode === 'hybrid' ? 'Huidige Besparingen' : 'Potentiele Besparingen:'}
             </h2>
           </div>
 
